@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Herramientas gratuitas para españoles: calculadora de finiquito, IRPF, días festivos 2025, conversor, calculadora de hipoteca, días hábiles y mucho más."/>
+<meta name="keywords" content="calculadora finiquito españa, calcular irpf, dias festivos 2025 españa, calculadora hipoteca, dias habiles, conversor euros"/>
+<title>HerramientasES — Calculadoras y utilidades para España</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+--bg:#f4f1eb;
+--bg2:#eceae3;
+--panel:#ffffff;
+--border:#d8d4c8;
+--ink:#1a1916;
+--ink2:#5a5750;
+--ink3:#9a968e;
+--accent:#c84b2f;
+--accent2:#e8873a;
+--green:#2e7d5e;
+--blue:#2355a0;
+--yellow:#d4a017;
+--shadow:0 2px 16px rgba(0,0,0,0.07);
+--radius:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Instrument Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* HEADER */
+header{background:var(–ink);position:sticky;top:0;z-index:200;border-bottom:3px solid var(–accent)}
+.header-inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:58px}
+.logo{font-family:‘Syne’,sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.5px;text-decoration:none}
+.logo span{color:var(–accent2)}
+.header-nav{display:flex;gap:4px}
+.header-nav a{color:rgba(255,255,255,0.55);font-size:12px;font-weight:500;text-decoration:none;padding:6px 12px;border-radius:5px;transition:all 0.18s;white-space:nowrap}
+.header-nav a:hover{color:#fff;background:rgba(255,255,255,0.08)}
+.header-date{font-family:‘Syne’,sans-serif;font-size:11px;color:rgba(255,255,255,0.35);white-space:nowrap}
+
+/* HERO */
+.hero{background:var(–ink);padding:52px 24px 48px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:‘🇪🇸’;position:absolute;font-size:320px;opacity:0.03;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero h1{font-family:‘Syne’,sans-serif;font-size:clamp(26px,5vw,52px);font-weight:800;color:#fff;letter-spacing:-1px;line-height:1.1;margin-bottom:14px}
+.hero h1 em{color:var(–accent2);font-style:normal}
+.hero p{color:rgba(255,255,255,0.45);font-size:16px;max-width:520px;margin:0 auto 28px;line-height:1.6}
+.tools-count{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);font-size:12px;padding:7px 18px;border-radius:20px;font-weight:500}
+.tools-count span{color:var(–accent2);font-weight:700;font-size:14px}
+
+/* NAV TABS */
+.tab-bar{background:var(–panel);border-bottom:1px solid var(–border);position:sticky;top:58px;z-index:150;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.tab-inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tab-inner::-webkit-scrollbar{display:none}
+.tab{background:none;border:none;color:var(–ink2);font-family:‘Syne’,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.3px;padding:14px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.18s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab:hover{color:var(–ink);background:var(–bg2)}
+.tab.active{color:var(–accent);border-bottom-color:var(–accent)}
+
+/* MAIN */
+main{max-width:1140px;margin:0 auto;padding:32px 24px 80px}
+.section{display:none;animation:fadeUp 0.35s ease}
+.section.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* TOOL PANELS */
+.tool-grid{display:grid;gap:20px}
+.tool-grid.cols-2{grid-template-columns:1fr 1fr}
+.tool-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.panel{background:var(–panel);border:1px solid var(–border);border-radius:var(–radius);padding:28px;box-shadow:var(–shadow)}
+.panel-title{font-family:‘Syne’,sans-serif;font-size:16px;font-weight:700;color:var(–ink);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.panel-title .icon{font-size:20px}
+.panel-sub{font-size:12px;color:var(–ink3);margin-bottom:22px;line-height:1.5}
+
+/* FORM ELEMENTS */
+label{display:block;font-size:12px;font-weight:600;color:var(–ink2);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+input[type=number],input[type=text],input[type=date],select{width:100%;padding:11px 14px;border:1.5px solid var(–border);border-radius:7px;font-family:‘Instrument Sans’,sans-serif;font-size:14px;color:var(–ink);background:var(–bg);transition:border 0.18s;outline:none;appearance:none}
+input:focus,select:focus{border-color:var(–accent);background:#fff}
+.field{margin-bottom:16px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(–accent);color:#fff;border:none;padding:12px 24px;border-radius:7px;font-family:‘Syne’,sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.18s;width:100%;letter-spacing:0.3px}
+.btn:hover{background:#a83a21;transform:translateY(-1px);box-shadow:0 4px 14px rgba(200,75,47,0.3)}
+.btn:active{transform:none}
+.btn-green{background:var(–green)}.btn-green:hover{background:#1f5e45;box-shadow:0 4px 14px rgba(46,125,94,0.3)}
+.btn-blue{background:var(–blue)}.btn-blue:hover{background:#1a4080;box-shadow:0 4px 14px rgba(35,85,160,0.3)}
+
+/* RESULT BOX */
+.result{background:linear-gradient(135deg,#fff9f7 0%,#fff 100%);border:1.5px solid #f0c4b8;border-radius:8px;padding:20px;margin-top:18px;display:none}
+.result.show{display:block;animation:fadeUp 0.3s ease}
+.result-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(–accent);margin-bottom:6px}
+.result-value{font-family:‘Syne’,sans-serif;font-size:28px;font-weight:800;color:var(–ink);line-height:1.1}
+.result-detail{font-size:12px;color:var(–ink2);margin-top:8px;line-height:1.7}
+.result-green{background:linear-gradient(135deg,#f0faf5,#fff);border-color:#a8d5be}
+.result-green .result-label{color:var(–green)}
+.result-blue{background:linear-gradient(135deg,#f0f4fa,#fff);border-color:#a8bedd}
+.result-blue .result-label{color:var(–blue)}
+.result-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(–border)}
+.result-row:last-child{border-bottom:none}
+.result-row .rk{font-size:13px;color:var(–ink2)}
+.result-row .rv{font-family:‘Syne’,sans-serif;font-size:14px;font-weight:700;color:var(–ink)}
+.result-row.total .rk{font-weight:700;color:var(–ink)}
+.result-row.total .rv{font-size:18px;color:var(–accent)}
+.result-row.pos .rv{color:var(–green)}
+.result-row.neg .rv{color:var(–accent)}
+
+/* FESTIVOS TABLE */
+.festivos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:8px}
+.festivo-item{background:var(–bg2);border-radius:8px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.festivo-date{font-family:‘Syne’,sans-serif;font-size:13px;font-weight:700;color:var(–accent);min-width:60px}
+.festivo-name{font-size:13px;color:var(–ink);line-height:1.3}
+.festivo-type{font-size:10px;color:var(–ink3);margin-top:2px}
+.comunidad-select{margin-bottom:20px}
+
+/* DIAS HABILES */
+.dh-result{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.dh-box{background:var(–bg2);border-radius:8px;padding:16px;text-align:center}
+.dh-num{font-family:‘Syne’,sans-serif;font-size:32px;font-weight:800;color:var(–ink);line-height:1}
+.dh-label{font-size:11px;color:var(–ink3);margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+
+/* CONVERTER */
+.conv-display{background:var(–ink);border-radius:8px;padding:20px;margin-bottom:16px;text-align:center}
+.conv-amount{font-family:‘Syne’,sans-serif;font-size:42px;font-weight:800;color:#fff;line-height:1}
+.conv-currency{font-size:14px;color:rgba(255,255,255,0.45);margin-top:4px}
+.conv-result{font-family:‘Syne’,sans-serif;font-size:26px;font-weight:700;color:var(–accent2);margin-top:8px}
+.conv-rate{font-size:11px;color:rgba(255,255,255,0.3);margin-top:4px}
+.currencies-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.curr-btn{background:var(–bg2);border:1.5px solid var(–border);border-radius:7px;padding:10px 6px;cursor:pointer;text-align:center;transition:all 0.18s;font-family:‘Syne’,sans-serif;font-size:11px;font-weight:700;color:var(–ink2)}
+.curr-btn:hover,.curr-btn.active{background:var(–ink);color:#fff;border-color:var(–ink)}
+
+/* HIPOTECA */
+.hipoteca-chart{margin-top:16px}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.bar-label{font-size:11px;color:var(–ink2);width:80px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;background:var(–bg2);border-radius:4px;height:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width 0.6s ease;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:700;color:#fff}
+
+/* IRPF BANDS */
+.band{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;margin-bottom:6px}
+.band-color{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.band-info{flex:1;font-size:12px;color:var(–ink2)}
+.band-pct{font-family:‘Syne’,sans-serif;font-size:14px;font-weight:700;color:var(–ink)}
+
+/* BUSCADOR */
+.search-box{position:relative;margin-bottom:24px}
+.search-box input{padding-left:40px;font-size:15px;background:#fff}
+.search-box::before{content:‘🔍’;position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none}
+.tool-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.tool-card{background:var(–panel);border:1px solid var(–border);border-radius:var(–radius);padding:20px;cursor:pointer;transition:all 0.2s;text-decoration:none;display:block}
+.tool-card:hover{border-color:var(–accent);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.09)}
+.tool-card-icon{font-size:28px;margin-bottom:10px}
+.tool-card-name{font-family:‘Syne’,sans-serif;font-size:14px;font-weight:700;color:var(–ink);margin-bottom:4px}
+.tool-card-desc{font-size:11px;color:var(–ink3);line-height:1.4}
+
+/* FOOTER */
+footer{background:var(–ink);color:rgba(255,255,255,0.4);font-size:11px;text-align:center;padding:28px 24px;line-height:1.9}
+footer strong{color:rgba(255,255,255,0.7)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.tool-grid.cols-2,.tool-grid.cols-3{grid-template-columns:1fr}
+.field-row{grid-template-columns:1fr}
+.header-nav{display:none}
+.dh-result{grid-template-columns:1fr 1fr}
+.currencies-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+<a href="#" class="logo">Herramientas<span>ES</span></a>
+<nav class="header-nav">
+<a href="#" onclick="showTab('inicio')">Inicio</a>
+<a href="#" onclick="showTab('finiquito')">Finiquito</a>
+<a href="#" onclick="showTab('irpf')">IRPF</a>
+<a href="#" onclick="showTab('hipoteca')">Hipoteca</a>
+<a href="#" onclick="showTab('festivos')">Festivos</a>
+<a href="#" onclick="showTab('diashabiles')">Días hábiles</a>
+<a href="#" onclick="showTab('conversor')">Conversor</a>
+</nav>
+<div class="header-date" id="headerDate"></div>
+</div>
+</header>
+
+<div class="hero">
+<h1>Herramientas gratuitas<br/>para <em>España</em></h1>
+<p>Calculadoras, conversores y consultas laborales. Todo funciona al instante, sin registro ni publicidad.</p>
+<div class="tools-count">✅ <span>12</span> herramientas gratuitas · Sin registro</div>
+</div>
+
+<div class="tab-bar">
+<div class="tab-inner">
+<button class="tab active" onclick="showTab('inicio')" id="tab-inicio">🏠 Inicio</button>
+<button class="tab" onclick="showTab('finiquito')" id="tab-finiquito">💼 Finiquito</button>
+<button class="tab" onclick="showTab('irpf')" id="tab-irpf">📊 IRPF</button>
+<button class="tab" onclick="showTab('hipoteca')" id="tab-hipoteca">🏠 Hipoteca</button>
+<button class="tab" onclick="showTab('festivos')" id="tab-festivos">📅 Festivos 2025</button>
+<button class="tab" onclick="showTab('diashabiles')" id="tab-diashabiles">🗓️ Días hábiles</button>
+<button class="tab" onclick="showTab('conversor')" id="tab-conversor">💱 Conversor</button>
+<button class="tab" onclick="showTab('sueldo')" id="tab-sueldo">💰 Sueldo neto</button>
+<button class="tab" onclick="showTab('ipc')" id="tab-ipc">📈 IPC / Subida</button>
+<button class="tab" onclick="showTab('edad')" id="tab-edad">🎂 Calculadora edad</button>
+<button class="tab" onclick="showTab('iban')" id="tab-iban">🏦 Validar IBAN</button>
+<button class="tab" onclick="showTab('dni')" id="tab-dni">🪪 Letra DNI</button>
+</div>
+</div>
+
+<main>
+
+<!-- ════ INICIO ════ -->
+
+<section class="section active" id="sec-inicio">
+<div class="search-box">
+<input type="text" placeholder="Buscar herramienta…" oninput="filterTools(this.value)" id="searchInput"/>
+</div>
+<div class="tool-cards" id="toolCards">
+<a class="tool-card" href="#" onclick="showTab('finiquito')"><div class="tool-card-icon">💼</div><div class="tool-card-name">Calculadora de finiquito</div><div class="tool-card-desc">Calcula lo que te deben al cesar tu contrato</div></a>
+<a class="tool-card" href="#" onclick="showTab('irpf')"><div class="tool-card-icon">📊</div><div class="tool-card-name">Calculadora IRPF 2025</div><div class="tool-card-desc">Tramos del impuesto y retención estimada</div></a>
+<a class="tool-card" href="#" onclick="showTab('hipoteca')"><div class="tool-card-icon">🏡</div><div class="tool-card-name">Calculadora hipoteca</div><div class="tool-card-desc">Cuota mensual, intereses totales y amortización</div></a>
+<a class="tool-card" href="#" onclick="showTab('festivos')"><div class="tool-card-icon">📅</div><div class="tool-card-name">Festivos 2025 España</div><div class="tool-card-desc">Calendario completo nacional y por comunidad</div></a>
+<a class="tool-card" href="#" onclick="showTab('diashabiles')"><div class="tool-card-icon">🗓️</div><div class="tool-card-name">Días hábiles entre fechas</div><div class="tool-card-desc">Cuenta días laborables descontando festivos</div></a>
+<a class="tool-card" href="#" onclick="showTab('conversor')"><div class="tool-card-icon">💱</div><div class="tool-card-name">Conversor de divisas</div><div class="tool-card-desc">Euros a dólares, libras, yenes y más</div></a>
+<a class="tool-card" href="#" onclick="showTab('sueldo')"><div class="tool-card-icon">💰</div><div class="tool-card-name">Sueldo bruto a neto</div><div class="tool-card-desc">Calcula tu salario neto mensual y anual</div></a>
+<a class="tool-card" href="#" onclick="showTab('ipc')"><div class="tool-card-icon">📈</div><div class="tool-card-name">Actualizar precio por IPC</div><div class="tool-card-desc">Ajusta un precio según la inflación española</div></a>
+<a class="tool-card" href="#" onclick="showTab('edad')"><div class="tool-card-icon">🎂</div><div class="tool-card-name">Calculadora de edad</div><div class="tool-card-desc">Años, meses y días exactos desde tu nacimiento</div></a>
+<a class="tool-card" href="#" onclick="showTab('iban')"><div class="tool-card-icon">🏦</div><div class="tool-card-name">Validar IBAN español</div><div class="tool-card-desc">Comprueba si un número de cuenta es válido</div></a>
+<a class="tool-card" href="#" onclick="showTab('dni')"><div class="tool-card-icon">🪪</div><div class="tool-card-name">Calcular letra DNI</div><div class="tool-card-desc">Obtén la letra de cualquier número de DNI</div></a>
+<a class="tool-card" href="#" onclick="showTab('hipoteca')"><div class="tool-card-icon">📉</div><div class="tool-card-name">Amortización anticipada</div><div class="tool-card-desc">Ahorro al amortizar tu hipoteca antes</div></a>
+</div>
+</section>
+
+<!-- ════ FINIQUITO ════ -->
+
+<section class="section" id="sec-finiquito">
+<div class="tool-grid cols-2">
+<div class="panel">
+<div class="panel-title"><span class="icon">💼</span> Calculadora de finiquito</div>
+<div class="panel-sub">Calcula las cantidades que te corresponden al terminar tu contrato laboral en España según el Estatuto de los Trabajadores.</div>
+<div class="field"><label>Salario bruto anual (€)</label><input type="number" id="fq_salario" placeholder="25000" min="0"/></div>
+<div class="field-row">
+<div><label>Fecha inicio contrato</label><input type="date" id="fq_inicio"/></div>
+<div><label>Fecha fin contrato</label><input type="date" id="fq_fin"/></div>
+</div>
+<div class="field"><label>Tipo de despido / baja</label>
+<select id="fq_tipo">
+<option value="improcedente">Despido improcedente</option>
+<option value="procedente">Despido procedente (causas objetivas)</option>
+<option value="expedrc">Despido por ERTE / causas económicas</option>
+<option value="baja">Baja voluntaria</option>
+<option value="mutual">Mutuo acuerdo</option>
+</select>
+</div>
+<div class="field"><label>Días de vacaciones no disfrutadas</label><input type="number" id="fq_vacas" placeholder="0" min="0" max="30"/></div>
+<div class="field"><label>Pagas extra prorrateadas <small style="font-weight:400;text-transform:none">(marcar si ya incluidas en nómina)</small></label>
+<select id="fq_pagas"><option value="no">No prorrateadas (calcular)</option><option value="si">Ya prorrateadas en nómina</option></select>
+</div>
+<button class="btn" onclick="calcFiniquito()">Calcular finiquito →</button>
+<div class="result" id="fq_result"></div>
+</div>
+<div class="panel">
+<div class="panel-title"><span class="icon">ℹ️</span> ¿Qué incluye el finiquito?</div>
+<div class="panel-sub">Guía rápida sobre tus derechos al finalizar un contrato.</div>
+<div style="font-size:13px;line-height:1.9;color:var(--ink2)">
+<p style="margin-bottom:12px"><strong style="color:var(--ink)">📌 Partes del finiquito:</strong></p>
+<p style="margin-bottom:8px">✅ <strong>Salario pendiente</strong> — días trabajados del mes en curso no pagados aún</p>
+<p style="margin-bottom:8px">✅ <strong>Vacaciones no disfrutadas</strong> — proporcional a los días que quedan</p>
+<p style="margin-bottom:8px">✅ <strong>Paga extra</strong> — parte proporcional si no está prorrateada</p>
+<p style="margin-bottom:16px">✅ <strong>Indemnización</strong> — varía según tipo de despido</p>
+<div style="background:var(--bg2);border-radius:8px;padding:14px;font-size:12px">
+<strong>Indemnizaciones por ley:</strong><br/>
+• Despido improcedente: <strong>33 días/año</strong> (máx. 24 mensualidades)<br/>
+• Despido procedente: <strong>20 días/año</strong> (máx. 12 mensualidades)<br/>
+• ERTE/económico: <strong>20 días/año</strong><br/>
+• Baja voluntaria: <strong>0 €</strong> de indemnización<br/>
+• Mutuo acuerdo: <strong>negociable</strong>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ════ IRPF ════ -->
+
+<section class="section" id="sec-irpf">
+<div class="tool-grid cols-2">
+<div class="panel">
+<div class="panel-title"><span class="icon">📊</span> Calculadora IRPF 2025</div>
+<div class="panel-sub">Estima tu retención en nómina y la cuota a pagar en la declaración de la renta.</div>
+<div class="field"><label>Salario bruto anual (€)</label><input type="number" id="irpf_salario" placeholder="30000" oninput="calcIRPF()"/></div>
+<div class="field-row">
+<div><label>Situación familiar</label>
+<select id="irpf_familia" onchange="calcIRPF()">
+<option value="1">Sin hijos / soltero</option>
+<option value="2">Casado, cónyuge no trabaja</option>
+<option value="3">Un hijo</option>
+<option value="4">Dos hijos</option>
+<option value="5">Tres o más hijos</option>
+</select>
+</div>
+<div><label>Comunidad autónoma</label>
+<select id="irpf_ccaa" onchange="calcIRPF()">
+<option value="0">Madrid (más baja)</option>
+<option value="1" selected>Media nacional</option>
+<option value="2">Cataluña / País Vasco</option>
+</select>
+</div>
+</div>
+<div class="field"><label>Otros ingresos anuales (€) <small style="font-weight:400;text-transform:none">alquiler, intereses…</small></label>
+<input type="number" id="irpf_otros" placeholder="0" oninput="calcIRPF()"/>
+</div>
+<div class="result show result-blue" id="irpf_result" style="display:block">
+<div style="color:var(--ink3);font-size:13px;text-align:center;padding:10px 0">Introduce tu salario para ver el resultado</div>
+</div>
+</div>
+<div class="panel">
+<div class="panel-title"><span class="icon">📉</span> Tramos IRPF 2025</div>
+<div class="panel-sub">Escala estatal + autonómica media. El IRPF es progresivo: cada tramo solo aplica a la parte del sueldo que entra en él.</div>
+<div id="irpf_bands"></div>
+</div>
+</div>
+</section>
+
+<!-- ════ HIPOTECA ════ -->
+
+<section class="section" id="sec-hipoteca">
+<div class="tool-grid cols-2">
+<div class="panel">
+<div class="panel-title"><span class="icon">🏡</span> Calculadora de hipoteca</div>
+<div class="panel-sub">Calcula tu cuota mensual, el total de intereses y el cuadro de amortización.</div>
+<div class="field"><label>Precio del inmueble (€)</label><input type="number" id="hip_precio" placeholder="200000" oninput="calcHipoteca()"/></div>
+<div class="field"><label>Entrada / ahorros (€)</label><input type="number" id="hip_entrada" placeholder="40000" oninput="calcHipoteca()"/></div>
+<div class="field-row">
+<div><label>Tipo de interés anual (%)</label><input type="number" id="hip_tipo" placeholder="3.5" step="0.01" oninput="calcHipoteca()"/></div>
+<div><label>Plazo (años)</label><input type="number" id="hip_plazo" placeholder="25" min="5" max="40" oninput="calcHipoteca()"/></div>
+</div>
+<div class="result show result-green" id="hip_result" style="display:block">
+<div style="color:var(--ink3);font-size:13px;text-align:center;padding:10px 0">Introduce los datos para ver la cuota</div>
+</div>
+</div>
+<div class="panel">
+<div class="panel-title"><span class="icon">📊</span> Distribución del pago</div>
+<div class="panel-sub">Desglose visual de lo que pagas en total.</div>
+<div id="hip_chart"><div style="color:var(--ink3);font-size:13px;text-align:center;padding:30px 0">Introduce los datos en el panel izquierdo</div></div>
+<div style="margin-top:20px;font-size:12px;color:var(--ink3);background:var(--bg2);border-radius:8px;padding:14px;line-height:1.7">
+💡 <strong>Consejo:</strong> Con el euríbor actual, muchos expertos recomiendan hipoteca <strong>mixta</strong> (fijo los primeros 5-10 años, luego variable). Consulta siempre a tu banco y compara al menos 3 ofertas.
+</div>
+</div>
+</div>
+</section>
+
+<!-- ════ FESTIVOS ════ -->
+
+<section class="section" id="sec-festivos">
+<div class="panel">
+<div class="panel-title"><span class="icon">📅</span> Días festivos 2025 — España</div>
+<div class="panel-sub">Festivos nacionales y autonómicos. Selecciona tu comunidad para ver los días específicos.</div>
+<div class="comunidad-select">
+<label>Selecciona tu comunidad autónoma</label>
+<select onchange="renderFestivos(this.value)" id="festivos_ccaa">
+<option value="nacional">Solo nacionales (todas las CCAA)</option>
+<option value="madrid">Comunidad de Madrid</option>
+<option value="catalunya">Cataluña</option>
+<option value="andalucia">Andalucía</option>
+<option value="valencia">Comunitat Valenciana</option>
+<option value="euskadi">País Vasco</option>
+<option value="galicia">Galicia</option>
+<option value="canarias">Canarias</option>
+<option value="aragon">Aragón</option>
+<option value="castilla">Castilla y León</option>
+<option value="murcia">Región de Murcia</option>
+</select>
+</div>
+<div id="festivos_container"></div>
+</div>
+</section>
+
+<!-- ════ DÍAS HÁBILES ════ -->
+
+<section class="section" id="sec-diashabiles">
+<div class="tool-grid cols-2">
+<div class="panel">
+<div class="panel-title"><span class="icon">🗓️</span> Días hábiles entre dos fechas</div>
+<div class="panel-sub">Calcula los días laborables reales descontando fines de semana y festivos nacionales.</div>
+<div class="field-row">
+<div><label>Fecha inicio</label><input type="date" id="dh_inicio"/></div>
+<div><label>Fecha fin</label><input type="date" id="dh_fin"/></div>
+</div>
+<div class="field"><label>Comunidad autónoma</label>
+<select id="dh_ccaa">
+<option value="nacional">Nacional (sin festivos autonómicos)</option>
+<option value="madrid">Comunidad de Madrid</option>
+<option value="catalunya">Cataluña</option>
+<option value="andalucia">Andalucía</option>
+<option value="valencia">Comunitat Valenciana</option>
+<option value="euskadi">País Vasco</option>
+<option value="galicia">Galicia</option>
+</select>
+</div>
+<button class="btn btn-blue" onclick="calcDiasHabiles()">Calcular →</button>
+<div class="result result-blue" id="dh_result"></div>
+</div>
+<div class="panel">
+<div class="panel-title"><span class="icon">💡</span> ¿Para qué sirve?</div>
+<div class="panel-sub">Casos de uso habituales para contar días hábiles.</div>
+<div style="font-size:13px;line-height:1.9;color:var(--ink2)">
+<p style="margin-bottom:10px">📋 <strong>Plazos administrativos</strong> — Los organismos públicos y juzgados cuentan en días hábiles, no naturales.</p>
+<p style="margin-bottom:10px">⚖️ <strong>Plazos judiciales</strong> — Recursos, alegaciones y notificaciones tienen plazo en días hábiles.</p>
+<p style="margin-bottom:10px">🏢 <strong>Contratos y preaviso</strong> — El preaviso de baja voluntaria (generalmente 15-30 días) suele ser en días naturales, pero comprueba tu convenio.</p>
+<p style="margin-bottom:10px">💼 <strong>Vacaciones</strong> — El Estatuto de los Trabajadores establece mínimo 30 días naturales o 22 días hábiles al año.</p>
+<p>🏦 <strong>Transferencias bancarias</strong> — Los bancos procesan en días hábiles (lunes a viernes sin festivos).</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ════ CONVERSOR ════ -->
+
+<section class="section" id="sec-conversor">
+<div class="tool-grid cols-2">
+<div class="panel">
+<div class="panel-title"><span class="icon">💱</span> Conversor de divisas</div>
+<div class="panel-sub">Tipos de cambio de referencia. Actualiza el importe para convertir al instante.</div>
+<div class="field"><label>Cantidad en euros (€)</label>
+<input type="number" id="conv_amount" placeholder="100" oninput="calcConversor()"/>
+</div>
+<div class="conv-display" id="conv_display">
+<div class="conv-amount" id="conv_eur">€100</div>
+<div class="conv-currency">Euros</div>
+<div class="conv-result" id="conv_res">Selecciona una divisa abajo</div>
+<div class="conv-rate" id="conv_rate"></div>
+</div>
+<div class="currencies-grid" id="conv_btns"></div>
+</div>
+<div class="panel">
+<div class="panel-title"><span class="icon">🌍</span> Tabla de conversión</div>
+<div class="panel-sub">Equivalencias para 100 € en las principales divisas.</div>
+<div id="conv_table"></div>
+<div style="margin-top:16px;background:var(--bg2);border-radius:8px;padding:12px;font-size:11px;color:var(--ink3);line-height:1.7">
+⚠️ Tipos de cambio orientativos. Para transacciones reales consulta tu banco o <strong>xe.com</strong>. Los tipos fluctúan a diario.
+</div>
+</div>
+</div>
+</section>
+
+<!-- ════ SUELDO NETO ════ -->
+
+<section class="section" id="sec-sueldo">
+<div class="tool-grid cols-2">
+<div class="panel">
+<div class="panel-title"><span class="icon">💰</span> Bruto a Neto 2025</div>
+<div class="panel-sub">Calcula cuánto cobrarás realmente en nómina descontando IRPF y cotizaciones a la Seguridad Social.</div>
+<div class="field"><label>Salario bruto anual (€)</label><input type="number" id="sn_bruto" placeholder="28000" oninput="calcSueldo()"/></div>
+<div class="field-row">
+<div><label>Número de pagas</label>
+<select id="sn_pagas" onchange="calcSueldo()"><option value="12">12 pagas</option><option value="14">14 pagas</option></select>
+</div>
+<div><label>Tipo de contrato</label>
+<select id="sn_contrato" onchange="calcSueldo()"><option value="general">General</option><option value="autonomo">Autónomo (est.)</option></select>
+</div>
+</div>
+<div class="result show" id="sn_result" style="display:block">
+<div style="color:var(--ink3);font-size:13px;text-align:center;padding:10px 0">Introduce tu salario bruto</div>
+</div>
+</div>
+<div class="panel">
+<div class="panel-title"><span class="icon">📋</span> Deducciones 2025</div>
+<div class="panel-sub">Porcentajes vigentes de cotización por parte del trabajador.</div>
+<div style="font-size:13px;line-height:1.8;color:var(--ink2)">
+<div style="background:var(--bg2);border-radius:8px;padding:16px;margin-bottom:14px">
+<strong style="color:var(--ink)">Cotización Seguridad Social (trabajador):</strong><br/>
+• Contingencias comunes: <strong>4,70%</strong><br/>
+• Desempleo (contrato indefinido): <strong>1,55%</strong><br/>
+• Desempleo (contrato temporal): <strong>1,60%</strong><br/>
+• Formación profesional: <strong>0,10%</strong><br/>
+• <strong>Total aprox.: 6,35%</strong>
+</div>
+<div style="background:var(--bg2);border-radius:8px;padding:16px">
+<strong style="color:var(--ink)">IRPF:</strong><br/>
+Varía entre el 19% y el 47% según el tramo. La retención en nómina es una estimación del impuesto anual. Se regulariza en la declaración de la renta (mayo-junio).
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ════ IPC ════ -->
+
+<section class="section" id="sec-ipc">
+<div class="tool-grid cols-2">
+<div class="panel">
+<div class="panel-title"><span class="icon">📈</span> Actualizar precio por IPC</div>
+<div class="panel-sub">Calcula cuánto vale hoy un precio del pasado ajustado por la inflación española (IPC).</div>
+<div class="field"><label>Precio original (€)</label><input type="number" id="ipc_precio" placeholder="1000" oninput="calcIPC()"/></div>
+<div class="field-row">
+<div><label>Año de origen</label>
+<select id="ipc_desde" onchange="calcIPC()">
+<option value="2000">2000</option><option value="2005">2005</option><option value="2010">2010</option>
+<option value="2015">2015</option><option value="2018">2018</option><option value="2019">2019</option>
+<option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option>
+<option value="2023">2023</option><option value="2024" selected>2024</option>
+</select>
+</div>
+<div><label>Año destino</label><select id="ipc_hasta" onchange="calcIPC()"><option value="2025" selected>2025</option></select></div>
+</div>
+<div class="result" id="ipc_result"></div>
+</div>
+<div class="panel">
+<div class="panel-title"><span class="icon">📊</span> IPC histórico España</div>
+<div class="panel-sub">Variación anual del IPC en España (INE).</div>
+<div id="ipc_chart" style="margin-top:8px"></div>
+</div>
+</div>
+</section>
+
+<!-- ════ EDAD ════ -->
+
+<section class="section" id="sec-edad">
+<div class="tool-grid cols-2">
+<div class="panel">
+<div class="panel-title"><span class="icon">🎂</span> Calculadora de edad exacta</div>
+<div class="panel-sub">Calcula tu edad en años, meses, días, horas y días para tu próximo cumpleaños.</div>
+<div class="field"><label>Fecha de nacimiento</label><input type="date" id="edad_fecha" oninput="calcEdad()"/></div>
+<div class="result" id="edad_result"></div>
+</div>
+<div class="panel">
+<div class="panel-title"><span class="icon">🌟</span> Datos curiosos sobre tu edad</div>
+<div id="edad_fun" style="font-size:13px;line-height:1.9;color:var(--ink2)">
+<p>Introduce tu fecha de nacimiento para ver datos curiosos sobre tu vida en números.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ════ IBAN ════ -->
+
+<section class="section" id="sec-iban">
+<div class="tool-grid cols-2">
+<div class="panel">
+<div class="panel-title"><span class="icon">🏦</span> Validar IBAN español</div>
+<div class="panel-sub">Comprueba si un número de cuenta bancaria española (IBAN) tiene formato y dígitos de control correctos.</div>
+<div class="field"><label>Número IBAN</label><input type="text" id="iban_input" placeholder="ES91 2100 0418 4502 0005 1332" maxlength="29" oninput="validarIBAN()"/></div>
+<div class="result" id="iban_result"></div>
+</div>
+<div class="panel">
+<div class="panel-title"><span class="icon">ℹ️</span> Estructura del IBAN español</div>
+<div style="font-size:13px;line-height:1.8;color:var(--ink2)">
+<div style="background:var(--bg2);border-radius:8px;padding:16px;font-family:monospace;font-size:14px;margin-bottom:14px;letter-spacing:1px">
+<span style="color:var(--accent)">ES</span><span style="color:var(--blue)">91</span> <span style="color:var(--green)">2100 0418</span> <span style="color:var(--yellow)">45</span> <span style="color:var(--ink)">0200 0513 32</span>
+</div>
+<p style="margin-bottom:6px"><span style="color:var(--accent)">■</span> <strong>ES</strong> — Código de país</p>
+<p style="margin-bottom:6px"><span style="color:var(--blue)">■</span> <strong>91</strong> — Dígitos de control (verificación)</p>
+<p style="margin-bottom:6px"><span style="color:var(--green)">■</span> <strong>2100 0418</strong> — Código banco (4) + oficina (4)</p>
+<p style="margin-bottom:6px"><span style="color:var(--yellow)">■</span> <strong>45</strong> — Dígitos de control CCC</p>
+<p><span style="color:var(--ink)">■</span> <strong>0200 0513 32</strong> — Número de cuenta (10 dígitos)</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ════ DNI ════ -->
+
+<section class="section" id="sec-dni">
+<div class="tool-grid cols-2">
+<div class="panel">
+<div class="panel-title"><span class="icon">🪪</span> Calcular letra del DNI</div>
+<div class="panel-sub">Obtén la letra que corresponde a cualquier número de DNI español y valida si la letra introducida es correcta.</div>
+<div class="field"><label>Número del DNI (sin letra)</label><input type="number" id="dni_num" placeholder="12345678" max="99999999" oninput="calcDNI()"/></div>
+<div class="field"><label>Letra actual (opcional, para verificar)</label><input type="text" id="dni_letra" placeholder="Z" maxlength="1" oninput="calcDNI()" style="text-transform:uppercase"/></div>
+<div class="result" id="dni_result"></div>
+</div>
+<div class="panel">
+<div class="panel-title"><span class="icon">🔤</span> Tabla de letras DNI</div>
+<div class="panel-sub">El algoritmo calcula el resto de dividir el número entre 23 y asigna la letra correspondiente.</div>
+<div id="dni_table" style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-top:8px"></div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<strong>HerramientasES</strong> — Calculadoras gratuitas para España<br/>
+Información orientativa. Consulta siempre a un profesional para decisiones importantes.<br/>
+Las calculadoras se basan en la legislación española vigente en 2025.
+</footer>
+
+<script>
+// ══════════════════════════════════════
+// DATE / HEADER
+// ══════════════════════════════════════
+const NOW = new Date();
+document.getElementById('headerDate').textContent =
+NOW.toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+
+// ══════════════════════════════════════
+// TABS
+// ══════════════════════════════════════
+function showTab(id) {
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+const sec = document.getElementById('sec-'+id);
+const tab = document.getElementById('tab-'+id);
+if(sec) sec.classList.add('active');
+if(tab) tab.classList.add('active');
+window.scrollTo({top:0,behavior:'smooth'});
+return false;
+}
+
+function filterTools(q) {
+const cards = document.querySelectorAll('.tool-card');
+cards.forEach(c => {
+const text = c.textContent.toLowerCase();
+c.style.display = text.includes(q.toLowerCase()) ? 'block' : 'none';
+});
+}
+
+// ══════════════════════════════════════
+// FINIQUITO
+// ══════════════════════════════════════
+function calcFiniquito() {
+const salario = parseFloat(document.getElementById('fq_salario').value)||0;
+const inicio = new Date(document.getElementById('fq_inicio').value);
+const fin = new Date(document.getElementById('fq_fin').value);
+const tipo = document.getElementById('fq_tipo').value;
+const vacas = parseFloat(document.getElementById('fq_vacas').value)||0;
+const pagas = document.getElementById('fq_pagas').value;
+const res = document.getElementById('fq_result');
+
+if(!salario||isNaN(inicio)||isNaN(fin)||fin<=inicio){
+res.innerHTML='<div style="color:var(--accent);font-size:13px">Por favor, introduce todos los datos correctamente.</div>';
+res.classList.add('show'); return;
+}
+
+const diarioB = salario/365;
+const mensualB = salario/12;
+
+// Días trabajados en el mes de fin
+const diasMes = fin.getDate();
+const diasTrabajados = diasMes;
+const salPendiente = (mensualB/30)*diasTrabajados;
+
+// Años trabajados (exactos)
+const ms = fin - inicio;
+const años = ms/(1000*60*60*24*365.25);
+
+// Vacaciones
+const vacacionesPend = (salario/365)*vacas;
+
+// Paga extra prorrateada
+let pagaExtra = 0;
+if(pagas==='no'){
+const mesInicio = inicio.getMonth();
+const mesFin = fin.getMonth();
+// Dos pagas extra (junio y diciembre) - proporcional al semestre en curso
+const diasPrimer = Math.max(0, Math.min(mesFin, 5) - Math.max(mesInicio,0)) * 30;
+const diasSeg = Math.max(0, Math.min(mesFin,11) - Math.max(mesInicio,6)) * 30;
+pagaExtra = (mensualB / 180) * (diasPrimer + diasSeg);
+if(pagaExtra<0) pagaExtra=0;
+pagaExtra = Math.max(0, (mensualB/6) * (años % 1));
+}
+
+// Indemnización
+let indem = 0, indemLabel = '';
+const diasPorAño = tipo==='improcedente'?33:tipo==='procedente'||tipo==='expedrc'?20:0;
+const maxMeses = tipo==='improcedente'?24:12;
+if(diasPorAño>0){
+indem = Math.min(diarioB*diasPorAño*años, mensualB*maxMeses);
+indemLabel = `${diasPorAño} días/año × ${años.toFixed(2)} años`;
+} else {
+indemLabel = tipo==='baja'?'Baja voluntaria: sin indemnización':'Mutuo acuerdo: negociable';
+}
+
+const total = salPendiente + vacacionesPend + pagaExtra + indem;
+
+res.innerHTML = `
+<div class="result-label">Finiquito estimado</div>
+<div class="result-value">${fmt(total)} €</div>
+<div style="margin-top:16px">
+<div class="result-row"><span class="rk">Salario pendiente (${diasTrabajados} días)</span><span class="rv">${fmt(salPendiente)} €</span></div>
+<div class="result-row"><span class="rk">Vacaciones no disfrutadas (${vacas} días)</span><span class="rv">${fmt(vacacionesPend)} €</span></div>
+${pagas==='no'?`<div class="result-row"><span class="rk">Parte proporcional paga extra</span><span class="rv">${fmt(pagaExtra)} €</span></div>`:''}
+<div class="result-row"><span class="rk">Indemnización — ${indemLabel}</span><span class="rv">${fmt(indem)} €</span></div>
+<div class="result-row total"><span class="rk">TOTAL BRUTO</span><span class="rv">${fmt(total)} €</span></div>
+</div>
+<div style="font-size:11px;color:var(--ink3);margin-top:10px">* Cantidad bruta antes de IRPF. El finiquito tributa como rendimiento del trabajo.</div>`;
+res.classList.add('show');
+}
+
+// ══════════════════════════════════════
+// IRPF
+// ══════════════════════════════════════
+const TRAMOS_IRPF = [
+{min:0, max:12450, pct:0.19, label:'Hasta 12.450 €'},
+{min:12450, max:20200, pct:0.24, label:'12.450 € – 20.200 €'},
+{min:20200, max:35200, pct:0.30, label:'20.200 € – 35.200 €'},
+{min:35200, max:60000, pct:0.37, label:'35.200 € – 60.000 €'},
+{min:60000, max:300000, pct:0.45, label:'60.000 € – 300.000 €'},
+{min:300000,max:Infinity,pct:0.47,label:'Más de 300.000 €'},
+];
+const CCAA_BONUS = {0:-0.02, 1:0, 2:0.02};
+const FAMILIA_DEDUCCION = {1:0, 2:3400, 3:2400, 4:4800, 5:7200};
+
+function calcIRPF(){
+const bruto = parseFloat(document.getElementById('irpf_salario').value)||0;
+const ccaa = CCAA_BONUS[document.getElementById('irpf_ccaa').value]||0;
+const familia = FAMILIA_DEDUCCION[document.getElementById('irpf_familia').value]||0;
+const otros = parseFloat(document.getElementById('irpf_otros').value)||0;
+const res = document.getElementById('irpf_result');
+if(!bruto){res.innerHTML='<div style="color:var(--ink3);font-size:13px;text-align:center;padding:10px 0">Introduce tu salario para ver el resultado</div>';return;}
+
+const baseImponible = bruto + otros - Math.min(2000, bruto*0.02); // mínimo deducible gastos
+let cuota = 0;
+for(const t of TRAMOS_IRPF){
+if(baseImponible<=t.min) break;
+const base = Math.min(baseImponible,t.max)-t.min;
+cuota += base*(t.pct+ccaa);
+}
+cuota = Math.max(0, cuota - familia);
+const retencion = cuota/bruto;
+const neto = bruto - cuota - bruto*0.0635;
+const mensualNeto = neto/12;
+
+res.innerHTML=`
+<div class="result-label">Retención estimada</div>
+<div class="result-value">${(retencion*100).toFixed(1)}%</div>
+<div style="margin-top:16px">
+<div class="result-row"><span class="rk">Base imponible</span><span class="rv">${fmt(baseImponible)} €</span></div>
+<div class="result-row"><span class="rk">Cuota IRPF anual estimada</span><span class="rv">${fmt(cuota)} €</span></div>
+<div class="result-row"><span class="rk">Cotiz. SS trabajador (6,35%)</span><span class="rv">${fmt(bruto*0.0635)} €</span></div>
+<div class="result-row total"><span class="rk">Sueldo neto anual</span><span class="rv">${fmt(neto)} €</span></div>
+<div class="result-row total"><span class="rk">Sueldo neto mensual</span><span class="rv">${fmt(mensualNeto)} €</span></div>
+</div>`;
+res.style.display='block';
+
+// Bands highlight
+renderIRPFBands(baseImponible, ccaa);
+}
+
+function renderIRPFBands(base=0, ccaa=0){
+const colors=['#2355a0','#2e7d5e','#d4a017','#c84b2f','#7b1fa2','#c62828'];
+const container = document.getElementById('irpf_bands');
+container.innerHTML = TRAMOS_IRPF.map((t,i)=>{
+const active = base > t.min;
+const pct = ((t.pct+ccaa)*100).toFixed(0);
+return `<div class="band" style="background:${active?'rgba(200,75,47,0.05)':'var(--bg2)'}">
+<div class="band-color" style="background:${colors[i]};opacity:${active?1:0.3}"></div>
+<div class="band-info" style="opacity:${active?1:0.5}">${t.label}</div>
+<div class="band-pct" style="color:${colors[i]};opacity:${active?1:0.4}">${pct}%</div>
+</div>`;
+}).join('');
+}
+renderIRPFBands();
+
+// ══════════════════════════════════════
+// HIPOTECA
+// ══════════════════════════════════════
+function calcHipoteca(){
+const precio = parseFloat(document.getElementById('hip_precio').value)||0;
+const entrada = parseFloat(document.getElementById('hip_entrada').value)||0;
+const tipo = parseFloat(document.getElementById('hip_tipo').value)||0;
+const plazo = parseInt(document.getElementById('hip_plazo').value)||0;
+const res = document.getElementById('hip_result');
+const chart = document.getElementById('hip_chart');
+if(!precio||!tipo||!plazo){res.innerHTML='<div style="color:var(--ink3);font-size:13px;text-align:center;padding:10px 0">Introduce los datos para ver la cuota</div>';return;}
+
+const capital = precio - entrada;
+if(capital<=0){res.innerHTML='<div style="color:var(--accent);font-size:13px">La entrada supera el precio del inmueble.</div>';return;}
+const r = (tipo/100)/12;
+const n = plazo*12;
+const cuota = capital*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+const totalPagado = cuota*n;
+const totalIntereses = totalPagado - capital;
+const ltv = (capital/precio)*100;
+
+res.innerHTML=`
+<div class="result-label">Cuota mensual estimada</div>
+<div class="result-value">${fmt(cuota)} €/mes</div>
+<div style="margin-top:16px">
+<div class="result-row"><span class="rk">Capital prestado</span><span class="rv">${fmt(capital)} €</span></div>
+<div class="result-row"><span class="rk">Total intereses pagados</span><span class="rv">${fmt(totalIntereses)} €</span></div>
+<div class="result-row"><span class="rk">Total pagado (capital + intereses)</span><span class="rv">${fmt(totalPagado)} €</span></div>
+<div class="result-row"><span class="rk">Financiación sobre el valor (LTV)</span><span class="rv">${ltv.toFixed(1)}%</span></div>
+</div>`;
+res.style.display='block';
+
+const capPct = (capital/totalPagado*100).toFixed(1);
+const intPct = (totalIntereses/totalPagado*100).toFixed(1);
+chart.innerHTML=`
+<div class="bar-row"><div class="bar-label">Capital</div><div class="bar-track"><div class="bar-fill" style="width:${capPct}%;background:var(--green)">${capPct}%</div></div></div>
+<div class="bar-row"><div class="bar-label">Intereses</div><div class="bar-track"><div class="bar-fill" style="width:${intPct}%;background:var(--accent)">${intPct}%</div></div></div>
+<div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div class="dh-box"><div class="dh-num" style="font-size:22px;color:var(--green)">${fmt(capital)} €</div><div class="dh-label">Capital</div></div>
+<div class="dh-box"><div class="dh-num" style="font-size:22px;color:var(--accent)">${fmt(totalIntereses)} €</div><div class="dh-label">Intereses</div></div>
+</div>
+<div style="margin-top:10px;background:var(--bg2);border-radius:8px;padding:12px;font-size:12px;color:var(--ink2)">
+💡 Con tipo de interés al ${tipo}%, pagas <strong>${fmt(totalIntereses)} €</strong> en intereses. Si amortizas anticipadamente, este coste se reduce proporcionalmente.
+</div>`;
+}
+
+// ══════════════════════════════════════
+// FESTIVOS 2025
+// ══════════════════════════════════════
+const FESTIVOS_NAC = [
+{d:'2025-01-01',n:'Año Nuevo',t:'Nacional'},
+{d:'2025-01-06',n:'Epifanía del Señor (Reyes Magos)',t:'Nacional'},
+{d:'2025-04-18',n:'Viernes Santo',t:'Nacional'},
+{d:'2025-05-01',n:'Fiesta del Trabajo',t:'Nacional'},
+{d:'2025-08-15',n:'Asunción de la Virgen',t:'Nacional'},
+{d:'2025-10-12',n:'Fiesta Nacional de España',t:'Nacional'},
+{d:'2025-11-01',n:'Todos los Santos',t:'Nacional'},
+{d:'2025-12-06',n:'Día de la Constitución',t:'Nacional'},
+{d:'2025-12-08',n:'Inmaculada Concepción',t:'Nacional'},
+{d:'2025-12-25',n:'Navidad',t:'Nacional'},
+];
+const FESTIVOS_CCAA = {
+madrid:[
+{d:'2025-03-03',n:'Lunes de Carnaval',t:'Autonómico'},
+{d:'2025-04-17',n:'Jueves Santo',t:'Autonómico'},
+{d:'2025-05-02',n:'Fiesta de la Comunidad de Madrid',t:'Autonómico'},
+{d:'2025-11-10',n:'Almudena (capital)',t:'Local Madrid'},
+],
+catalunya:[
+{d:'2025-04-17',n:'Dijous Sant (Jueves Santo)',t:'Autonómico'},
+{d:'2025-04-21',n:'Dilluns de Pasqua',t:'Autonómico'},
+{d:'2025-06-24',n:'Sant Joan',t:'Autonómico'},
+{d:'2025-09-11',n:'La Diada Nacional de Catalunya',t:'Autonómico'},
+{d:'2025-12-26',n:'Sant Esteve',t:'Autonómico'},
+],
+andalucia:[
+{d:'2025-02-28',n:'Día de Andalucía',t:'Autonómico'},
+{d:'2025-04-17',n:'Jueves Santo',t:'Autonómico'},
+{d:'2025-04-21',n:'Lunes de Pascua',t:'Autonómico'},
+],
+valencia:[
+{d:'2025-03-19',n:'San José (Fallas)',t:'Autonómico'},
+{d:'2025-04-21',n:'Lunes de Pascua Florida',t:'Autonómico'},
+{d:'2025-10-09',n:'Día de la Comunitat Valenciana',t:'Autonómico'},
+{d:'2025-12-26',n:'San Esteban',t:'Autonómico'},
+],
+euskadi:[
+{d:'2025-04-17',n:'Jueves Santo',t:'Autonómico'},
+{d:'2025-04-21',n:'Lunes de Pascua',t:'Autonómico'},
+{d:'2025-07-25',n:'Santiago Apóstol',t:'Autonómico'},
+{d:'2025-10-25',n:'Euskadi Eguna',t:'Autonómico'},
+],
+galicia:[
+{d:'2025-04-17',n:'Jueves Santo',t:'Autonómico'},
+{d:'2025-07-25',n:'Santiago Apóstol / Día de Galicia',t:'Autonómico'},
+],
+canarias:[
+{d:'2025-04-17',n:'Jueves Santo',t:'Autonómico'},
+{d:'2025-04-21',n:'Lunes de Pascua',t:'Autonómico'},
+{d:'2025-05-30',n:'Día de Canarias',t:'Autonómico'},
+],
+aragon:[
+{d:'2025-04-23',n:'San Jorge (Día de Aragón)',t:'Autonómico'},
+{d:'2025-04-17',n:'Jueves Santo',t:'Autonómico'},
+],
+castilla:[
+{d:'2025-04-17',n:'Jueves Santo',t:'Autonómico'},
+{d:'2025-04-21',n:'Lunes de Pascua',t:'Autonómico'},
+{d:'2025-07-25',n:'Santiago Apóstol',t:'Autonómico'},
+{d:'2025-10-20',n:'Día de Castilla y León',t:'Autonómico'},
+],
+murcia:[
+{d:'2025-04-17',n:'Jueves Santo',t:'Autonómico'},
+{d:'2025-06-09',n:'Día de la Región de Murcia',t:'Autonómico'},
+],
+};
+
+function renderFestivos(ccaa='nacional'){
+const container = document.getElementById('festivos_container');
+const todos = [...FESTIVOS_NAC, ...(FESTIVOS_CCAA[ccaa]||[])];
+todos.sort((a,b)=>a.d.localeCompare(b.d));
+const hoy = new Date();
+container.innerHTML = `<div class="festivos-grid">${todos.map(f=>{
+const fecha = new Date(f.d);
+const pasado = fecha < hoy;
+const dias = Math.ceil((fecha-hoy)/(1000*60*60*24));
+const fmtFecha = fecha.toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'long'});
+return `<div class="festivo-item" style="opacity:${pasado?0.45:1}">
+<div>
+<div class="festivo-date">${fmtFecha.split(',')[0]}<br/>${fecha.toLocaleDateString('es-ES',{day:'numeric',month:'short'})}</div>
+</div>
+<div>
+<div class="festivo-name">${f.n}</div>
+<div class="festivo-type">${f.t} ${!pasado&&dias>=0?'· <strong>En '+dias+' días</strong>':pasado?'· Pasado':''}</div>
+</div>
+</div>`;
+}).join('')}</div>
+<div style="margin-top:16px;font-size:11px;color:var(--ink3);text-align:center">${todos.length} festivos · ${todos.filter(f=>new Date(f.d)>hoy).length} próximos</div>`;
+}
+renderFestivos();
+
+// ══════════════════════════════════════
+// DÍAS HÁBILES
+// ══════════════════════════════════════
+function calcDiasHabiles(){
+const ini = new Date(document.getElementById('dh_inicio').value);
+const fin = new Date(document.getElementById('dh_fin').value);
+const ccaa = document.getElementById('dh_ccaa').value;
+const res = document.getElementById('dh_result');
+if(isNaN(ini)||isNaN(fin)||fin<ini){
+res.innerHTML='<div style="color:var(--accent);font-size:13px">Introduce fechas válidas.</div>';
+res.classList.add('show'); return;
+}
+const festivos = new Set([...FESTIVOS_NAC,...(FESTIVOS_CCAA[ccaa]||[])].map(f=>f.d));
+let habiles=0, naturales=0, fds=0, fest=0;
+const cur = new Date(ini);
+while(cur<=fin){
+naturales++;
+const dow=cur.getDay();
+const ds=cur.toISOString().split('T')[0];
+if(dow===0||dow===6) fds++;
+else if(festivos.has(ds)) fest++;
+else habiles++;
+cur.setDate(cur.getDate()+1);
+}
+res.innerHTML=`
+<div class="result-label">Resultado</div>
+<div class="dh-result">
+<div class="dh-box"><div class="dh-num">${habiles}</div><div class="dh-label">Días hábiles</div></div>
+<div class="dh-box"><div class="dh-num">${naturales}</div><div class="dh-label">Días totales</div></div>
+<div class="dh-box"><div class="dh-num">${fds+fest}</div><div class="dh-label">No laborables</div></div>
+</div>
+<div style="margin-top:12px;font-size:12px;color:var(--ink2)">Fines de semana: <strong>${fds}</strong> · Festivos: <strong>${fest}</strong></div>`;
+res.classList.add('show');
+}
+
+// ══════════════════════════════════════
+// CONVERSOR
+// ══════════════════════════════════════
+const DIVISAS = {
+USD:{sym:'$', name:'Dólar (USD)', flag:'🇺🇸', rate:1.085},
+GBP:{sym:'£', name:'Libra (GBP)', flag:'🇬🇧', rate:0.856},
+JPY:{sym:'¥', name:'Yen (JPY)', flag:'🇯🇵', rate:162.5},
+CHF:{sym:'Fr', name:'Franco suizo', flag:'🇨🇭', rate:0.963},
+MXN:{sym:'$', name:'Peso Mexicano', flag:'🇲🇽', rate:18.64},
+ARS:{sym:'$', name:'Peso Argentino', flag:'🇦🇷', rate:985},
+BRL:{sym:'R$', name:'Real Brasileño', flag:'🇧🇷', rate:5.41},
+DKK:{sym:'kr', name:'Corona Danesa', flag:'🇩🇰', rate:7.46},
+PLN:{sym:'zł', name:'Złoty Polaco', flag:'🇵🇱', rate:4.27},
+};
+let convTarget = 'USD';
+
+function initConversor(){
+const btns = document.getElementById('conv_btns');
+btns.innerHTML = Object.entries(DIVISAS).map(([k,v])=>
+`<button class="curr-btn ${k===convTarget?'active':''}" onclick="setConvTarget('${k}')">${v.flag} ${k}</button>`
+).join('');
+const table = document.getElementById('conv_table');
+table.innerHTML = `<div style="display:grid;gap:6px">${Object.entries(DIVISAS).map(([k,v])=>{
+const val = (100*v.rate).toLocaleString('es-ES',{maximumFractionDigits:2});
+return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg2);border-radius:6px">
+<span style="font-size:13px">${v.flag} ${v.name}</span>
+<span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--blue)">${val} ${k}</span>
+</div>`;
+}).join('')}</div>`;
+calcConversor();
+}
+function setConvTarget(k){
+convTarget=k;
+document.querySelectorAll('.curr-btn').forEach(b=>b.classList.toggle('active',b.textContent.includes(k)));
+calcConversor();
+}
+function calcConversor(){
+const amount = parseFloat(document.getElementById('conv_amount').value)||100;
+const div = DIVISAS[convTarget];
+const result = amount * div.rate;
+document.getElementById('conv_eur').textContent = `€${amount.toLocaleString('es-ES')}`;
+document.getElementById('conv_res').textContent = `${div.sym}${result.toLocaleString('es-ES',{maximumFractionDigits:2})} ${convTarget}`;
+document.getElementById('conv_rate').textContent = `1 € = ${div.rate} ${convTarget} · Tipo orientativo`;
+}
+initConversor();
+
+// ══════════════════════════════════════
+// SUELDO NETO
+// ══════════════════════════════════════
+function calcSueldo(){
+const bruto = parseFloat(document.getElementById('sn_bruto').value)||0;
+const pagas = parseInt(document.getElementById('sn_pagas').value)||12;
+const res = document.getElementById('sn_result');
+if(!bruto){res.innerHTML='<div style="color:var(--ink3);font-size:13px;text-align:center;padding:10px 0">Introduce tu salario bruto</div>';res.style.display='block';return;}
+
+const ss = bruto*0.0635;
+const baseIRPF = bruto - ss - 2000;
+let irpf=0;
+for(const t of TRAMOS_IRPF){
+if(baseIRPF<=t.min) break;
+irpf += (Math.min(baseIRPF,t.max)-t.min)*t.pct;
+}
+irpf = Math.max(0,irpf);
+const neto = bruto - ss - irpf;
+const mensual = neto/pagas;
+const pctRetencion = (irpf/bruto*100).toFixed(1);
+
+res.innerHTML=`
+<div class="result-label">Sueldo neto estimado</div>
+<div class="result-value">${fmt(mensual)} €/mes</div>
+<div style="margin-top:16px">
+<div class="result-row"><span class="rk">Salario bruto anual</span><span class="rv">${fmt(bruto)} €</span></div>
+<div class="result-row neg"><span class="rk">− Cotización SS (6,35%)</span><span class="rv">− ${fmt(ss)} €</span></div>
+<div class="result-row neg"><span class="rk">− Retención IRPF (${pctRetencion}%)</span><span class="rv">− ${fmt(irpf)} €</span></div>
+<div class="result-row total pos"><span class="rk">= Sueldo neto anual</span><span class="rv">${fmt(neto)} €</span></div>
+<div class="result-row total pos"><span class="rk">= Sueldo neto por paga (${pagas})</span><span class="rv">${fmt(mensual)} €</span></div>
+</div>`;
+res.style.display='block';
+}
+
+// ══════════════════════════════════════
+// IPC
+// ══════════════════════════════════════
+const IPC_DATA = {
+2000:1.4,2001:2.7,2002:3.5,2003:3.0,2004:3.2,2005:3.7,2006:2.7,2007:4.2,
+2008:1.4,2009:-0.3,2010:3.0,2011:2.4,2012:2.9,2013:0.3,2014:-1.0,
+2015:0.0,2016:1.6,2017:1.1,2018:1.2,2019:0.8,2020:-0.5,2021:6.5,
+2022:8.4,2023:3.5,2024:2.8
+};
+
+function calcIPC(){
+const precio = parseFloat(document.getElementById('ipc_precio').value)||0;
+const desde = parseInt(document.getElementById('ipc_desde').value);
+const hasta = 2025;
+const res = document.getElementById('ipc_result');
+if(!precio){res.classList.remove('show');return;}
+let factor=1;
+for(let y=desde;y<hasta;y++){
+factor *= 1+(IPC_DATA[y]||2.5)/100;
+}
+const nuevo = precio*factor;
+const diff = nuevo-precio;
+res.innerHTML=`
+<div class="result-label">Precio actualizado a 2025</div>
+<div class="result-value">${fmt(nuevo)} €</div>
+<div class="result-detail">
+${fmt(precio)} € en ${desde} equivale a <strong>${fmt(nuevo)} €</strong> en 2025.<br/>
+Incremento acumulado: <strong>+${fmt(diff)} € (+${((factor-1)*100).toFixed(1)}%)</strong><br/>
+Período analizado: ${hasta-desde} años
+</div>`;
+res.classList.add('show');
+renderIPCChart();
+}
+
+function renderIPCChart(){
+const container = document.getElementById('ipc_chart');
+const entries = Object.entries(IPC_DATA).slice(-10);
+const max = Math.max(...entries.map(([,v])=>Math.abs(v)));
+container.innerHTML = entries.map(([y,v])=>{
+const pct = Math.abs(v)/max*100;
+const color = v<0?'var(--green)':v>5?'var(--accent)':v>3?'var(--accent2)':'var(--blue)';
+return `<div class="bar-row" style="margin-bottom:6px">
+<div class="bar-label">${y}</div>
+<div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color};min-width:30px">${v>0?'+':''}${v}%</div></div>
+</div>`;
+}).join('');
+}
+renderIPCChart();
+
+// ══════════════════════════════════════
+// EDAD
+// ══════════════════════════════════════
+function calcEdad(){
+const fecha = new Date(document.getElementById('edad_fecha').value);
+const res = document.getElementById('edad_result');
+const fun = document.getElementById('edad_fun');
+if(isNaN(fecha)||fecha>NOW){res.classList.remove('show');return;}
+
+const diff = NOW - fecha;
+const años = Math.floor(diff/(1000*60*60*24*365.25));
+const meses = Math.floor((diff%(1000*60*60*24*365.25))/(1000*60*60*24*30.44));
+const dias = Math.floor((diff%(1000*60*60*24*30.44))/(1000*60*60*24));
+const horas = Math.floor(diff/(1000*60*60));
+const proxCumple = new Date(fecha);
+proxCumple.setFullYear(NOW.getFullYear());
+if(proxCumple<=NOW) proxCumple.setFullYear(NOW.getFullYear()+1);
+const diasCumple = Math.ceil((proxCumple-NOW)/(1000*60*60*24));
+const semanas = Math.floor(diff/(1000*60*60*24*7));
+const latidos = Math.round(años*365.25*24*60*70);
+
+res.innerHTML=`
+<div class="result-label">Tu edad exacta</div>
+<div class="result-value">${años} años</div>
+<div class="result-detail">${años} años, ${meses} meses y ${dias} días<br/>
+🎂 Próximo cumpleaños en <strong>${diasCumple} días</strong></div>
+<div style="margin-top:14px">
+<div class="result-row"><span class="rk">Total en días</span><span class="rv">${Math.floor(diff/(1000*60*60*24)).toLocaleString('es-ES')}</span></div>
+<div class="result-row"><span class="rk">Total en semanas</span><span class="rv">${semanas.toLocaleString('es-ES')}</span></div>
+<div class="result-row"><span class="rk">Total en horas</span><span class="rv">${horas.toLocaleString('es-ES')}</span></div>
+</div>`;
+res.classList.add('show');
+
+fun.innerHTML=`<div style="display:grid;gap:10px">
+${[
+['❤️','Latidos del corazón',latidos.toLocaleString('es-ES')],
+['😴','Noches dormidas',Math.floor(años*365.25).toLocaleString('es-ES')],
+['🍽️','Comidas estimadas',(Math.floor(años*365.25)*3).toLocaleString('es-ES')],
+['🌍','Vueltas al sol',años],
+['🌙','Lunas llenas aprox.',Math.floor(años*12.37).toLocaleString('es-ES')],
+].map(([e,l,v])=>`<div style="display:flex;align-items:center;gap:12px;background:var(--bg2);padding:12px;border-radius:8px">
+<span style="font-size:22px">${e}</span>
+<div><div style="font-size:12px;color:var(--ink2)">${l}</div>
+<div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700">${v}</div></div>
+</div>`).join('')}
+</div>`;
+}
+
+// ══════════════════════════════════════
+// IBAN
+// ══════════════════════════════════════
+function validarIBAN(){
+let v = document.getElementById('iban_input').value.replace(/\s/g,'').toUpperCase();
+const res = document.getElementById('iban_result');
+if(v.length<4){res.classList.remove('show');return;}
+
+const valido = checkIBAN(v);
+const banco = v.substring(4,8);
+const bancos = {'2100':'CaixaBank','0049':'Santander','0075':'Banco Popular','0182':'BBVA','0081':'Banco Sabadell','1465':'ING','0128':'Bankinter','3025':'Kutxabank','2038':'Bankia/CaixaBank'};
+const nombreBanco = bancos[banco]||'Entidad desconocida';
+
+res.innerHTML=`
+<div class="result-label" style="color:${valido?'var(--green)':'var(--accent)'}">${valido?'✅ IBAN VÁLIDO':'❌ IBAN INVÁLIDO'}</div>
+<div class="result-value" style="font-size:16px;color:${valido?'var(--green)':'var(--accent)'};word-break:break-all">${v.match(/.{1,4}/g).join(' ')}</div>
+${valido?`<div class="result-detail">País: <strong>España (ES)</strong> · Banco: <strong>${nombreBanco}</strong> (cód. ${banco})<br/>Longitud: ${v.length} caracteres ✓</div>`:'<div class="result-detail">Revisa los dígitos o el formato del número de cuenta.</div>'}`;
+res.classList.add('show');
+}
+
+function checkIBAN(iban){
+if(!/^ES\d{22}$/.test(iban)) return false;
+const rearranged = iban.slice(4)+iban.slice(0,4);
+const numeric = rearranged.split('').map(c=>/[A-Z]/.test(c)?c.charCodeAt(0)-55:c).join('');
+let remainder = 0;
+for(const c of numeric) remainder=(remainder*10+parseInt(c))%97;
+return remainder===1;
+}
+
+// ══════════════════════════════════════
+// DNI
+// ══════════════════════════════════════
+const DNI_LETRAS = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+function calcDNI(){
+const num = parseInt(document.getElementById('dni_num').value)||0;
+const letra = document.getElementById('dni_letra').value.toUpperCase();
+const res = document.getElementById('dni_result');
+if(!num||num<1||num>99999999){res.classList.remove('show');return;}
+const correcta = DNI_LETRAS[num%23];
+const valido = !letra || letra===correcta;
+res.innerHTML=`
+<div class="result-label">Letra del DNI</div>
+<div class="result-value" style="font-size:48px;color:var(--blue)">${correcta}</div>
+<div class="result-detail"><strong>${num} ${correcta}</strong> — DNI ${valido?'✅ válido':'❌ la letra introducida ('+letra+') es incorrecta'}</div>
+<div style="margin-top:12px;background:var(--bg2);border-radius:6px;padding:10px;font-size:12px;color:var(--ink2)">
+Algoritmo: ${num} ÷ 23 = resto <strong>${num%23}</strong> → letra <strong>${correcta}</strong>
+</div>`;
+res.classList.add('show');
+renderDNITable(num%23);
+}
+
+function renderDNITable(resto=-1){
+const container = document.getElementById('dni_table');
+container.innerHTML = DNI_LETRAS.split('').map((l,i)=>
+`<div style="background:${i===resto?'var(--blue)':'var(--bg2)'};color:${i===resto?'#fff':'var(--ink2)'};border-radius:6px;padding:8px;text-align:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:700">
+<div style="font-size:10px;opacity:0.6;margin-bottom:2px">${i}</div>${l}
+</div>`
+).join('');
+}
+renderDNITable();
+
+// ══════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════
+function fmt(n){return n.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});}
+</script>
+
+</body>
+</html>
